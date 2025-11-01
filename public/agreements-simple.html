@@ -12,47 +12,48 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: #f5f5f5;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            background: #f8f9fa;
             min-height: 100vh;
+            color: #1a2332;
         }
 
         .header {
-            background: white;
-            padding: 1rem 2rem;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            background: #1a3a52;
+            padding: 1.25rem 2rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid #dee2e6;
         }
 
-        .header-left {
+        .header-title {
             display: flex;
             align-items: center;
-            gap: 2rem;
+            gap: 0.75rem;
         }
 
-        .nav-tabs {
+        .header-icon {
+            background: white;
+            padding: 0.5rem;
+            border-radius: 6px;
             display: flex;
-            gap: 0;
+            align-items: center;
+            justify-content: center;
         }
 
-        .nav-tab {
-            padding: 0.75rem 1.5rem;
-            cursor: pointer;
-            border: none;
-            background: none;
-            font-size: 0.95rem;
-            color: #666;
-            border-bottom: 2px solid transparent;
-            transition: all 0.2s;
-        }
-
-        .nav-tab.active {
-            color: #1a73e8;
-            border-bottom-color: #1a73e8;
+        .header h1 {
+            color: white;
+            font-size: 1.5rem;
             font-weight: 600;
+            margin: 0;
+        }
+
+        .header-subtitle {
+            color: #b8c5d1;
+            font-size: 0.875rem;
+            font-weight: 400;
+            margin-top: 0.125rem;
         }
 
         .header-right {
@@ -75,64 +76,173 @@
         }
 
         .container {
-            max-width: 1600px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 2rem 1.5rem;
+        }
+
+        .tip-section {
+            background: linear-gradient(135deg, #e8f5f1 0%, #d4ede5 100%);
+            border-left: 4px solid #00b894;
+            border-radius: 8px;
+            padding: 1rem 1.5rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .tip-icon {
+            background: #00b894;
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .tip-content {
+            flex: 1;
+        }
+
+        .tip-title {
+            font-weight: 600;
+            color: #1a2332;
+            margin-bottom: 0.25rem;
+        }
+
+        .tip-text {
+            color: #4a5568;
+            font-size: 0.9375rem;
+            line-height: 1.5;
         }
 
         .dashboard-cards {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 1.5rem;
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
         }
 
         .dashboard-card {
             background: white;
-            border-radius: 8px;
-            padding: 1.5rem;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            padding: 1.75rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
             transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+            overflow: hidden;
         }
 
         .dashboard-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+        }
+
+        .dashboard-card.pending {
+            background: linear-gradient(135deg, #fff9e6 0%, #fff5d6 100%);
+        }
+
+        .dashboard-card.in-progress {
+            background: linear-gradient(135deg, #f0f4f8 0%, #e6ecf2 100%);
+        }
+
+        .dashboard-card.completed {
+            background: linear-gradient(135deg, #e8f5f1 0%, #d4ede5 100%);
+        }
+
+        .card-icon {
+            position: absolute;
+            right: 1.5rem;
+            top: 1.5rem;
+            font-size: 2rem;
+            opacity: 0.3;
         }
 
         .card-number {
-            font-size: 3rem;
+            font-size: 3.5rem;
             font-weight: 700;
-            color: #333;
             margin-bottom: 0.5rem;
+            line-height: 1;
+        }
+
+        .dashboard-card.pending .card-number {
+            color: #f39c12;
+        }
+
+        .dashboard-card.in-progress .card-number {
+            color: #5a6c7d;
+        }
+
+        .dashboard-card.completed .card-number {
+            color: #00b894;
         }
 
         .card-title {
             font-size: 1rem;
             font-weight: 600;
-            color: #333;
+            color: #1a2332;
             margin-bottom: 0.5rem;
         }
 
         .card-description {
             font-size: 0.875rem;
-            color: #666;
+            color: #6c757d;
+            line-height: 1.5;
+        }
+
+        .documents-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .documents-header h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #1a2332;
             margin-bottom: 0.5rem;
         }
 
-        .card-alert {
-            font-size: 0.875rem;
-            color: #dc3545;
+        .tab-buttons {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .tab-btn {
+            background: white;
+            border: 1px solid #dee2e6;
+            padding: 0.625rem 1.25rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9375rem;
             font-weight: 500;
-            margin-top: 0.5rem;
+            color: #4a5568;
+            transition: all 0.2s;
+        }
+
+        .tab-btn:hover {
+            background: #f8f9fa;
+            border-color: #1a3a52;
+        }
+
+        .tab-btn.active {
+            background: #1a3a52;
+            color: white;
+            border-color: #1a3a52;
         }
 
         .search-section {
             background: white;
-            border-radius: 8px;
+            border-radius: 12px;
             padding: 1.5rem;
             margin-bottom: 1.5rem;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+            display: none;
         }
 
         .search-row {
@@ -186,15 +296,154 @@
         }
 
         .documents-section {
+            display: grid;
+            gap: 1.25rem;
+        }
+
+        .document-card {
             background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+            transition: all 0.2s;
+            border-left: 4px solid transparent;
+        }
+
+        .document-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+        }
+
+        .document-card.pending {
+            border-left-color: #f39c12;
+        }
+
+        .document-card.in-progress {
+            border-left-color: #5a6c7d;
+        }
+
+        .document-card.completed {
+            border-left-color: #00b894;
+        }
+
+        .document-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .document-icon-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex: 1;
+        }
+
+        .document-icon {
+            background: #f8f9fa;
+            padding: 0.75rem;
             border-radius: 8px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1a3a52;
+            font-size: 1.5rem;
+        }
+
+        .document-info {
+            flex: 1;
+        }
+
+        .document-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #1a2332;
+            margin-bottom: 0.25rem;
+        }
+
+        .document-subtitle {
+            font-size: 0.875rem;
+            color: #6c757d;
+        }
+
+        .document-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.375rem 0.875rem;
+            border-radius: 20px;
+            font-size: 0.8125rem;
+            font-weight: 600;
+        }
+
+        .document-status.pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .document-status.in-progress {
+            background: #e7f1ff;
+            color: #004085;
+        }
+
+        .document-status.completed {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .document-meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .meta-item {
+            font-size: 0.875rem;
+        }
+
+        .meta-label {
+            color: #6c757d;
+            margin-bottom: 0.25rem;
+        }
+
+        .meta-value {
+            color: #1a2332;
+            font-weight: 500;
+        }
+
+        .document-actions {
+            display: flex;
+            gap: 0.75rem;
+            padding-top: 1rem;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .btn-sign-now {
+            background: #1a3a52;
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 6px;
+            font-size: 0.9375rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-sign-now:hover {
+            background: #0f2537;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(26, 58, 82, 0.3);
         }
 
         .documents-table {
             width: 100%;
             border-collapse: collapse;
+            display: none;
         }
 
         .documents-table thead {
@@ -383,10 +632,19 @@
 </head>
 <body>
     <div class="header">
-        <div class="header-left">
-            <div class="nav-tabs">
-                <button class="nav-tab active">eSignature Dashboard</button>
-                <button class="nav-tab">Form Templates</button>
+        <div class="header-title">
+            <div class="header-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1a3a52" stroke-width="2">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                    <polyline points="10 9 9 9 8 9"></polyline>
+                </svg>
+            </div>
+            <div>
+                <h1>E-Signature Dashboard</h1>
+                <div class="header-subtitle">Powered by Adobe Sign • Commonwealth Financial Network</div>
             </div>
         </div>
         <div class="header-right">
@@ -401,87 +659,62 @@
 
         <div id="error" class="error" style="display: none;"></div>
 
-        <!-- Dashboard Cards -->
-        <div id="dashboard-cards" class="dashboard-cards" style="display: none;">
-            <div class="dashboard-card">
-                <div class="card-number" id="my-turn-count">0</div>
-                <div class="card-title">It's Your Turn to Sign</div>
-                <div class="card-description">These are documents that are pending your action</div>
-            </div>
-            <div class="dashboard-card">
-                <div class="card-number" id="waiting-others-count">0</div>
-                <div class="card-title">Waiting for Others to Sign</div>
-                <div class="card-description">These are documents that are pending signature from another party</div>
-            </div>
-            <div class="dashboard-card">
-                <div class="card-number" id="canceled-count">0</div>
-                <div class="card-title">Canceled</div>
-                <div class="card-description">These are documents that have expired, failed authentication, or canceled by sender</div>
-            </div>
-            <div class="dashboard-card">
-                <div class="card-number" id="completed-count">0</div>
-                <div class="card-title">Completed</div>
-                <div class="card-description">These are documents that have been completed</div>
+        <!-- Tip Section -->
+        <div id="tip-section" class="tip-section" style="display: none;">
+            <div class="tip-icon">ⓘ</div>
+            <div class="tip-content">
+                <div class="tip-title">Tip:</div>
+                <div class="tip-text">Documents requiring your signature are highlighted below. Click "Sign Now" to review and electronically sign with Adobe Sign. All signatures are legally binding and securely stored.</div>
             </div>
         </div>
 
-        <!-- Search and Filter -->
-        <div id="search-section" class="search-section" style="display: none;">
-            <div class="search-row">
-                <div class="search-group">
-                    <label>Search by Client Name, Account Number, Request ID</label>
-                    <input type="text" class="search-input" id="search-input" placeholder="Enter search term...">
-                </div>
-                <div class="search-group">
-                    <label>Start Date</label>
-                    <input type="date" class="search-input" id="start-date">
-                </div>
-                <div class="search-group">
-                    <label>End Date</label>
-                    <input type="date" class="search-input" id="end-date">
-                </div>
-                <button class="search-btn" onclick="searchDocuments()">Search</button>
+        <!-- Dashboard Cards -->
+        <div id="dashboard-cards" class="dashboard-cards" style="display: none;">
+            <div class="dashboard-card pending">
+                <div class="card-icon">📝</div>
+                <div class="card-number" id="my-turn-count">0</div>
+                <div class="card-title">Pending Action</div>
+                <div class="card-description">Requires your signature</div>
+            </div>
+            <div class="dashboard-card in-progress">
+                <div class="card-icon">🕐</div>
+                <div class="card-number" id="waiting-others-count">0</div>
+                <div class="card-title">In Progress</div>
+                <div class="card-description">Awaiting completion</div>
+            </div>
+            <div class="dashboard-card completed">
+                <div class="card-icon">✓</div>
+                <div class="card-number" id="completed-count">0</div>
+                <div class="card-title">Completed</div>
+                <div class="card-description">Successfully signed</div>
+            </div>
+        </div>
+
+        <!-- Documents Header -->
+        <div id="documents-header" class="documents-header" style="display: none;">
+            <h2>Your Documents</h2>
+            <div class="tab-buttons">
+                <button class="tab-btn active" data-filter="all">All Documents</button>
+                <button class="tab-btn" data-filter="pending">Pending</button>
+                <button class="tab-btn" data-filter="in-progress">In Progress</button>
+                <button class="tab-btn" data-filter="signed">Signed</button>
+                <button class="tab-btn" data-filter="completed">Completed</button>
             </div>
         </div>
 
         <!-- Documents List -->
         <div id="documents-section" class="documents-section" style="display: none;">
-            <table class="documents-table">
-                <thead>
-                    <tr>
-                        <th>Envelope ID/Request ID</th>
-                        <th>Created</th>
-                        <th>Sender</th>
-                        <th>Subject</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody id="documents-tbody">
-                </tbody>
-            </table>
-            <div class="pagination">
-                <div class="items-per-page">
-                    <label>Items Per Page:</label>
-                    <select id="items-per-page">
-                        <option value="25">25</option>
-                        <option value="50" selected>50</option>
-                        <option value="100">100</option>
-                    </select>
-                </div>
-                <div class="page-info">
-                    <span id="page-info">Page 1 of 1 (0 items)</span>
-                </div>
-                <div class="page-controls">
-                    <button class="page-btn" onclick="previousPage()">←</button>
-                    <input type="text" class="page-input" id="current-page" value="1" onchange="goToPage()">
-                    <button class="page-btn" onclick="nextPage()">→</button>
-                </div>
-            </div>
         </div>
 
         <div id="no-documents" class="no-documents" style="display: none;">
             <h2>No documents to sign</h2>
             <p>You don't have any pending documents at the moment.</p>
+        </div>
+
+        <!-- Recent Activity Sidebar (optional) -->
+        <div id="recent-activity" style="display: none;">
+            <h3>⏱ Recent Activity</h3>
+            <!-- Activity items will go here -->
         </div>
     </div>
 
@@ -553,126 +786,131 @@
         function updateDashboardCounts() {
             const myTurn = agreements.filter(a => a.status === 'WAITING_FOR_MY_SIGNATURE').length;
             const waitingOthers = agreements.filter(a => a.status === 'OUT_FOR_SIGNATURE').length;
-            const canceled = agreements.filter(a => a.status.includes('CANCELLED') || a.status.includes('EXPIRED')).length;
             const completed = agreements.filter(a => a.status === 'SIGNED' || a.status === 'APPROVED').length;
 
             document.getElementById('my-turn-count').textContent = myTurn;
             document.getElementById('waiting-others-count').textContent = waitingOthers;
-            document.getElementById('canceled-count').textContent = canceled;
             document.getElementById('completed-count').textContent = completed;
 
+            document.getElementById('tip-section').style.display = 'flex';
             document.getElementById('dashboard-cards').style.display = 'grid';
-            document.getElementById('search-section').style.display = 'block';
+            document.getElementById('documents-header').style.display = 'block';
         }
 
         function renderDocuments() {
-            filteredAgreements = agreements; // Start with all agreements
-            applyFiltersAndRender();
+            filteredAgreements = agreements;
+            renderDocumentCards();
         }
 
-        function searchDocuments() {
-            const searchTerm = document.getElementById('search-input').value.toLowerCase();
-            const startDate = document.getElementById('start-date').value;
-            const endDate = document.getElementById('end-date').value;
-
-            filteredAgreements = agreements.filter(agreement => {
-                let matches = true;
-
-                if (searchTerm) {
-                    const searchIn = (agreement.name || '').toLowerCase() + 
-                                   (agreement.id || '').toLowerCase() +
-                                   (agreement.modifiedDate || '').toLowerCase();
-                    matches = matches && searchIn.includes(searchTerm);
-                }
-
-                if (startDate) {
-                    matches = matches && new Date(agreement.modifiedDate) >= new Date(startDate);
-                }
-
-                if (endDate) {
-                    matches = matches && new Date(agreement.modifiedDate) <= new Date(endDate);
-                }
-
-                return matches;
-            });
-
-            currentPage = 1;
-            applyFiltersAndRender();
+        function getStatusClass(status) {
+            if (status === 'WAITING_FOR_MY_SIGNATURE') return 'pending';
+            if (status === 'OUT_FOR_SIGNATURE') return 'in-progress';
+            if (status === 'SIGNED' || status === 'APPROVED') return 'completed';
+            return 'in-progress';
         }
 
-        function applyFiltersAndRender() {
-            const start = (currentPage - 1) * itemsPerPage;
-            const end = start + itemsPerPage;
-            const paginatedAgreements = filteredAgreements.slice(start, end);
-
-            const tbody = document.getElementById('documents-tbody');
-            tbody.innerHTML = paginatedAgreements.map(agreement => `
-                <tr>
-                    <td>
-                        <span class="expand-icon">⇉</span> ${agreement.id}
-                    </td>
-                    <td>${formatDate(agreement.modifiedDate)}</td>
-                    <td>${escapeHtml(agreement.name || 'N/A')}</td>
-                    <td>${escapeHtml(agreement.name || 'N/A')}</td>
-                    <td>
-                        <span class="sign-now-link" onclick="openSigningWidget('${agreement.id}', '${escapeHtml(agreement.name)}')">Sign Now</span>
-                        <span class="menu-icon" style="margin-left: 1rem;">☰</span>
-                    </td>
-                </tr>
-            `).join('');
-
-            updatePagination();
-            document.getElementById('documents-section').style.display = 'block';
+        function getStatusLabel(status) {
+            if (status === 'WAITING_FOR_MY_SIGNATURE') return 'Pending';
+            if (status === 'OUT_FOR_SIGNATURE') return 'In Progress';
+            if (status === 'SIGNED' || status === 'APPROVED') return 'Completed';
+            return status.replace(/_/g, ' ');
         }
 
-        function updatePagination() {
-            const totalItems = filteredAgreements.length;
-            const totalPages = Math.ceil(totalItems / itemsPerPage);
+        function renderDocumentCards() {
+            const container = document.getElementById('documents-section');
             
-            document.getElementById('page-info').textContent = 
-                `Page ${currentPage} of ${totalPages} (${totalItems} items)`;
-            document.getElementById('current-page').value = currentPage;
+            if (filteredAgreements.length === 0) {
+                container.innerHTML = '<div class="no-documents">No documents found matching your criteria.</div>';
+                container.style.display = 'block';
+                return;
+            }
+
+            container.innerHTML = filteredAgreements.map(agreement => {
+                const statusClass = getStatusClass(agreement.status);
+                const statusLabel = getStatusLabel(agreement.status);
+                
+                return `
+                    <div class="document-card ${statusClass}">
+                        <div class="document-header">
+                            <div class="document-icon-wrapper">
+                                <div class="document-icon">📄</div>
+                                <div class="document-info">
+                                    <div class="document-title">${escapeHtml(agreement.name || 'Untitled Document')}</div>
+                                    <div class="document-subtitle">Account Opening</div>
+                                </div>
+                            </div>
+                            <span class="document-status ${statusClass}">
+                                ${statusLabel === 'Pending' ? '⚠' : statusLabel === 'In Progress' ? '🕐' : '✓'} ${statusLabel}
+                            </span>
+                        </div>
+                        <div class="document-meta">
+                            <div class="meta-item">
+                                <div class="meta-label">Requested:</div>
+                                <div class="meta-value">${formatShortDate(agreement.createdDate || agreement.modifiedDate)}</div>
+                            </div>
+                            <div class="meta-item">
+                                <div class="meta-label">Due:</div>
+                                <div class="meta-value">${formatShortDate(agreement.expirationTime || agreement.modifiedDate)}</div>
+                            </div>
+                        </div>
+                        <div class="document-actions">
+                            <button class="btn-sign-now" onclick="openSigningWidget('${agreement.id}', '${escapeHtml(agreement.name)}')">Sign Now</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            container.style.display = 'grid';
         }
 
-        function previousPage() {
-            if (currentPage > 1) {
-                currentPage--;
-                applyFiltersAndRender();
-            }
-        }
-
-        function nextPage() {
-            const totalPages = Math.ceil(filteredAgreements.length / itemsPerPage);
-            if (currentPage < totalPages) {
-                currentPage++;
-                applyFiltersAndRender();
-            }
-        }
-
-        function goToPage() {
-            const page = parseInt(document.getElementById('current-page').value);
-            const totalPages = Math.ceil(filteredAgreements.length / itemsPerPage);
-            if (page >= 1 && page <= totalPages) {
-                currentPage = page;
-                applyFiltersAndRender();
-            }
-        }
+        // Tab filtering
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            tabButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    tabButtons.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    
+                    const filter = btn.dataset.filter;
+                    if (filter === 'all') {
+                        filteredAgreements = agreements;
+                    } else if (filter === 'pending') {
+                        filteredAgreements = agreements.filter(a => a.status === 'WAITING_FOR_MY_SIGNATURE');
+                    } else if (filter === 'in-progress') {
+                        filteredAgreements = agreements.filter(a => a.status === 'OUT_FOR_SIGNATURE');
+                    } else if (filter === 'completed' || filter === 'signed') {
+                        filteredAgreements = agreements.filter(a => a.status === 'SIGNED' || a.status === 'APPROVED');
+                    }
+                    renderDocumentCards();
+                });
+            });
+        });
 
         function formatDate(dateString) {
             const date = new Date(dateString);
             return date.toLocaleDateString('en-US', { 
                 month: 'numeric', 
                 day: 'numeric', 
-                year: '2-digit' 
+                year: 'numeric' 
             }) + ', ' + 
             date.toLocaleTimeString('en-US', { 
                 hour: '2-digit', 
                 minute: '2-digit',
                 hour12: true 
-            }) + ' PST';
+            });
+        }
+
+        function formatShortDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-US', { 
+                month: 'numeric', 
+                day: 'numeric', 
+                year: 'numeric' 
+            });
         }
 
         function escapeHtml(text) {
+            if (!text) return '';
             const div = document.createElement('div');
             div.textContent = text;
             return div.innerHTML;
@@ -727,29 +965,6 @@
                 }
             }
         }
-
-        // Set default date range to last 30 days
-        window.addEventListener('DOMContentLoaded', () => {
-            const today = new Date();
-            const thirtyDaysAgo = new Date(today);
-            thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
-            
-            document.getElementById('start-date').valueAsDate = thirtyDaysAgo;
-            document.getElementById('end-date').valueAsDate = today;
-        });
-
-        // Event listeners
-        document.getElementById('items-per-page').addEventListener('change', (e) => {
-            itemsPerPage = parseInt(e.target.value);
-            currentPage = 1;
-            applyFiltersAndRender();
-        });
-
-        document.getElementById('search-input').addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                searchDocuments();
-            }
-        });
 
         // Check health and load agreements on page load
         checkHealth();
