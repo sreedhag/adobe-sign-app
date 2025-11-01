@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adobe Sign - My Documents</title>
+    <title>eSignature Dashboard</title>
     <style>
         * {
             margin: 0;
@@ -12,23 +12,53 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             background: #f5f5f5;
             min-height: 100vh;
         }
 
         .header {
             background: white;
-            padding: 1.5rem 2rem;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
             display: flex;
             justify-content: space-between;
             align-items: center;
+            border-bottom: 1px solid #dee2e6;
         }
 
-        .header h1 {
-            color: #333;
-            font-size: 1.5rem;
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 0;
+        }
+
+        .nav-tab {
+            padding: 0.75rem 1.5rem;
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-size: 0.95rem;
+            color: #666;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .nav-tab.active {
+            color: #1a73e8;
+            border-bottom-color: #1a73e8;
+            font-weight: 600;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
         }
 
         .logout-btn {
@@ -47,9 +77,218 @@
         }
 
         .container {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 2rem;
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .dashboard-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .dashboard-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-description {
+            font-size: 0.875rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-alert {
+            font-size: 0.875rem;
+            color: #dc3545;
+            font-weight: 500;
+            margin-top: 0.5rem;
+        }
+
+        .search-section {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-row {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .search-group {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .search-group label {
+            display: block;
+            font-size: 0.875rem;
+            color: #333;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.5rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 0.875rem;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #1a73e8;
+        }
+
+        .search-btn {
+            background: #1a73e8;
+            color: white;
+            border: none;
+            padding: 0.5rem 2rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 500;
+            height: 38px;
+            align-self: flex-end;
+        }
+
+        .search-btn:hover {
+            background: #1557b0;
+        }
+
+        .documents-section {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .documents-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .documents-table thead {
+            background: #f8f9fa;
+            border-bottom: 2px solid #dee2e6;
+        }
+
+        .documents-table th {
+            padding: 1rem;
+            text-align: left;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .documents-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 0.875rem;
+        }
+
+        .documents-table tbody tr:hover {
+            background: #f8f9fa;
+        }
+
+        .expand-icon {
+            cursor: pointer;
+            color: #666;
+        }
+
+        .sign-now-link {
+            color: #1a73e8;
+            text-decoration: none;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .sign-now-link:hover {
+            text-decoration: underline;
+        }
+
+        .menu-icon {
+            cursor: pointer;
+            color: #666;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            border-top: 1px solid #dee2e6;
+            background: #f8f9fa;
+        }
+
+        .items-per-page {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .items-per-page select {
+            padding: 0.25rem 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .page-info {
+            font-size: 0.875rem;
+            color: #666;
+        }
+
+        .page-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .page-btn {
+            background: none;
+            border: 1px solid #ddd;
+            padding: 0.25rem 0.5rem;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .page-input {
+            width: 40px;
+            padding: 0.25rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            text-align: center;
         }
 
         .loading {
@@ -66,106 +305,13 @@
             margin-bottom: 1rem;
         }
 
-        .agreements-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .agreement-card {
-            background: white;
-            border-radius: 8px;
-            padding: 1.5rem;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .agreement-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        }
-
-        .agreement-header {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 1rem;
-        }
-
-        .agreement-icon {
-            font-size: 2rem;
-            margin-right: 1rem;
-        }
-
-        .agreement-title {
-            flex: 1;
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #333;
-            word-break: break-word;
-        }
-
-        .agreement-meta {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-            font-size: 0.9rem;
-            color: #666;
-        }
-
-        .agreement-status {
-            display: inline-block;
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 500;
-        }
-
-        .status-waiting {
-            background: #fff3cd;
-            color: #856404;
-        }
-
-        .status-out {
-            background: #d1ecf1;
-            color: #0c5460;
-        }
-
-        .sign-btn {
-            width: 100%;
-            background: #DC143C;
-            color: white;
-            border: none;
-            padding: 0.75rem;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1rem;
-            font-weight: 500;
-            transition: background 0.3s ease;
-        }
-
-        .sign-btn:hover {
-            background: #B8102E;
-        }
-
-        .sign-btn:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-        }
-
         .no-documents {
             text-align: center;
             padding: 3rem;
             color: #666;
-            background: white;
-            border-radius: 8px;
         }
 
-        .no-documents h2 {
-            margin-bottom: 0.5rem;
-            color: #333;
-        }
-
+        /* Modal styles */
         .modal {
             display: none;
             position: fixed;
@@ -239,8 +385,15 @@
 </head>
 <body>
     <div class="header">
-        <h1>📝 My Documents for Signature</h1>
-        <a href="/logout" class="logout-btn">Logout</a>
+        <div class="header-left">
+            <div class="nav-tabs">
+                <button class="nav-tab active">eSignature Dashboard</button>
+                <button class="nav-tab">Form Templates</button>
+            </div>
+        </div>
+        <div class="header-right">
+            <a href="/logout" class="logout-btn">Logout</a>
+        </div>
     </div>
 
     <div class="container">
@@ -250,9 +403,91 @@
 
         <div id="error" class="error" style="display: none;"></div>
 
-        <div id="agreements-container" class="agreements-grid"></div>
+        <!-- Dashboard Cards -->
+        <div id="dashboard-cards" class="dashboard-cards" style="display: none;">
+            <div class="dashboard-card">
+                <div class="card-number" id="my-turn-count">0</div>
+                <div class="card-title">It's Your Turn to Sign</div>
+                <div class="card-description">These are documents that are pending your action</div>
+            </div>
+            <div class="dashboard-card">
+                <div class="card-number" id="waiting-others-count">0</div>
+                <div class="card-title">Waiting for Others to Sign</div>
+                <div class="card-description">These are documents that are pending signature from another party</div>
+            </div>
+            <div class="dashboard-card">
+                <div class="card-number" id="canceled-count">0</div>
+                <div class="card-title">Canceled</div>
+                <div class="card-description">These are documents that have expired, failed authentication, or canceled by sender</div>
+            </div>
+            <div class="dashboard-card">
+                <div class="card-number" id="completed-count">0</div>
+                <div class="card-title">Completed</div>
+                <div class="card-description">These are documents that have been completed</div>
+            </div>
+        </div>
+
+        <!-- Search and Filter -->
+        <div id="search-section" class="search-section" style="display: none;">
+            <div class="search-row">
+                <div class="search-group">
+                    <label>Search by Client Name, Account Number, Request ID</label>
+                    <input type="text" class="search-input" id="search-input" placeholder="Enter search term...">
+                </div>
+                <div class="search-group">
+                    <label>Start Date</label>
+                    <input type="date" class="search-input" id="start-date">
+                </div>
+                <div class="search-group">
+                    <label>End Date</label>
+                    <input type="date" class="search-input" id="end-date">
+                </div>
+                <button class="search-btn" onclick="searchDocuments()">Search</button>
+            </div>
+        </div>
+
+        <!-- Documents List -->
+        <div id="documents-section" class="documents-section" style="display: none;">
+            <table class="documents-table">
+                <thead>
+                    <tr>
+                        <th>Envelope ID/Request ID</th>
+                        <th>Created</th>
+                        <th>Sender</th>
+                        <th>Subject</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="documents-tbody">
+                </tbody>
+            </table>
+            <div class="pagination">
+                <div class="items-per-page">
+                    <label>Items Per Page:</label>
+                    <select id="items-per-page">
+                        <option value="25">25</option>
+                        <option value="50" selected>50</option>
+                        <option value="100">100</option>
+                    </select>
+                </div>
+                <div class="page-info">
+                    <span id="page-info">Page 1 of 1 (0 items)</span>
+                </div>
+                <div class="page-controls">
+                    <button class="page-btn" onclick="previousPage()">←</button>
+                    <input type="text" class="page-input" id="current-page" value="1" onchange="goToPage()">
+                    <button class="page-btn" onclick="nextPage()">→</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="no-documents" class="no-documents" style="display: none;">
+            <h2>No documents to sign</h2>
+            <p>You don't have any pending documents at the moment.</p>
+        </div>
     </div>
 
+    <!-- Signing Modal -->
     <div id="signing-modal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -267,6 +502,9 @@
 
     <script>
         let agreements = [];
+        let filteredAgreements = [];
+        let currentPage = 1;
+        let itemsPerPage = 50;
 
         async function loadAgreements() {
             try {
@@ -282,14 +520,10 @@
                 document.getElementById('loading').style.display = 'none';
                 
                 if (agreements.length === 0) {
-                    document.getElementById('agreements-container').innerHTML = `
-                        <div class="no-documents">
-                            <h2>No documents to sign</h2>
-                            <p>You don't have any pending documents at the moment.</p>
-                        </div>
-                    `;
+                    document.getElementById('no-documents').style.display = 'block';
                 } else {
-                    renderAgreements();
+                    updateDashboardCounts();
+                    renderDocuments();
                 }
             } catch (error) {
                 console.error('Error loading agreements:', error);
@@ -299,42 +533,126 @@
             }
         }
 
-        function renderAgreements() {
-            const container = document.getElementById('agreements-container');
-            container.innerHTML = agreements.map(agreement => `
-                <div class="agreement-card">
-                    <div class="agreement-header">
-                        <div class="agreement-icon">📄</div>
-                        <div class="agreement-title">${escapeHtml(agreement.name)}</div>
-                    </div>
-                    <div class="agreement-meta">
-                        <span class="agreement-status ${getStatusClass(agreement.status)}">
-                            ${formatStatus(agreement.status)}
-                        </span>
-                        <span>Modified: ${formatDate(agreement.modifiedDate)}</span>
-                    </div>
-                    <button class="sign-btn" onclick="openSigningWidget('${agreement.id}', '${escapeHtml(agreement.name)}')">
-                        Sign Now
-                    </button>
-                </div>
+        function updateDashboardCounts() {
+            const myTurn = agreements.filter(a => a.status === 'WAITING_FOR_MY_SIGNATURE').length;
+            const waitingOthers = agreements.filter(a => a.status === 'OUT_FOR_SIGNATURE').length;
+            const canceled = agreements.filter(a => a.status.includes('CANCELLED') || a.status.includes('EXPIRED')).length;
+            const completed = agreements.filter(a => a.status === 'SIGNED' || a.status === 'APPROVED').length;
+
+            document.getElementById('my-turn-count').textContent = myTurn;
+            document.getElementById('waiting-others-count').textContent = waitingOthers;
+            document.getElementById('canceled-count').textContent = canceled;
+            document.getElementById('completed-count').textContent = completed;
+
+            document.getElementById('dashboard-cards').style.display = 'grid';
+            document.getElementById('search-section').style.display = 'block';
+        }
+
+        function renderDocuments() {
+            filteredAgreements = agreements; // Start with all agreements
+            applyFiltersAndRender();
+        }
+
+        function searchDocuments() {
+            const searchTerm = document.getElementById('search-input').value.toLowerCase();
+            const startDate = document.getElementById('start-date').value;
+            const endDate = document.getElementById('end-date').value;
+
+            filteredAgreements = agreements.filter(agreement => {
+                let matches = true;
+
+                if (searchTerm) {
+                    const searchIn = (agreement.name || '').toLowerCase() + 
+                                   (agreement.id || '').toLowerCase() +
+                                   (agreement.modifiedDate || '').toLowerCase();
+                    matches = matches && searchIn.includes(searchTerm);
+                }
+
+                if (startDate) {
+                    matches = matches && new Date(agreement.modifiedDate) >= new Date(startDate);
+                }
+
+                if (endDate) {
+                    matches = matches && new Date(agreement.modifiedDate) <= new Date(endDate);
+                }
+
+                return matches;
+            });
+
+            currentPage = 1;
+            applyFiltersAndRender();
+        }
+
+        function applyFiltersAndRender() {
+            const start = (currentPage - 1) * itemsPerPage;
+            const end = start + itemsPerPage;
+            const paginatedAgreements = filteredAgreements.slice(start, end);
+
+            const tbody = document.getElementById('documents-tbody');
+            tbody.innerHTML = paginatedAgreements.map(agreement => `
+                <tr>
+                    <td>
+                        <span class="expand-icon">⇉</span> ${agreement.id}
+                    </td>
+                    <td>${formatDate(agreement.modifiedDate)}</td>
+                    <td>${escapeHtml(agreement.name || 'N/A')}</td>
+                    <td>${escapeHtml(agreement.name || 'N/A')}</td>
+                    <td>
+                        <span class="sign-now-link" onclick="openSigningWidget('${agreement.id}', '${escapeHtml(agreement.name)}')">Sign Now</span>
+                        <span class="menu-icon" style="margin-left: 1rem;">☰</span>
+                    </td>
+                </tr>
             `).join('');
+
+            updatePagination();
+            document.getElementById('documents-section').style.display = 'block';
         }
 
-        function getStatusClass(status) {
-            if (status.includes('WAITING')) return 'status-waiting';
-            return 'status-out';
+        function updatePagination() {
+            const totalItems = filteredAgreements.length;
+            const totalPages = Math.ceil(totalItems / itemsPerPage);
+            
+            document.getElementById('page-info').textContent = 
+                `Page ${currentPage} of ${totalPages} (${totalItems} items)`;
+            document.getElementById('current-page').value = currentPage;
         }
 
-        function formatStatus(status) {
-            return status.replace(/_/g, ' ').toLowerCase()
-                .split(' ')
-                .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-                .join(' ');
+        function previousPage() {
+            if (currentPage > 1) {
+                currentPage--;
+                applyFiltersAndRender();
+            }
+        }
+
+        function nextPage() {
+            const totalPages = Math.ceil(filteredAgreements.length / itemsPerPage);
+            if (currentPage < totalPages) {
+                currentPage++;
+                applyFiltersAndRender();
+            }
+        }
+
+        function goToPage() {
+            const page = parseInt(document.getElementById('current-page').value);
+            const totalPages = Math.ceil(filteredAgreements.length / itemsPerPage);
+            if (page >= 1 && page <= totalPages) {
+                currentPage = page;
+                applyFiltersAndRender();
+            }
         }
 
         function formatDate(dateString) {
             const date = new Date(dateString);
-            return date.toLocaleDateString() + ' ' + date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            return date.toLocaleDateString('en-US', { 
+                month: 'numeric', 
+                day: 'numeric', 
+                year: '2-digit' 
+            }) + ', ' + 
+            date.toLocaleTimeString('en-US', { 
+                hour: '2-digit', 
+                minute: '2-digit',
+                hour12: true 
+            }) + ' PST';
         }
 
         function escapeHtml(text) {
@@ -392,6 +710,29 @@
                 }
             }
         }
+
+        // Set default date range to last 30 days
+        window.addEventListener('DOMContentLoaded', () => {
+            const today = new Date();
+            const thirtyDaysAgo = new Date(today);
+            thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+            
+            document.getElementById('start-date').valueAsDate = thirtyDaysAgo;
+            document.getElementById('end-date').valueAsDate = today;
+        });
+
+        // Event listeners
+        document.getElementById('items-per-page').addEventListener('change', (e) => {
+            itemsPerPage = parseInt(e.target.value);
+            currentPage = 1;
+            applyFiltersAndRender();
+        });
+
+        document.getElementById('search-input').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                searchDocuments();
+            }
+        });
 
         loadAgreements();
     </script>
