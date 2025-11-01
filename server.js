@@ -33,7 +33,7 @@ const ADOBE_CONFIG = {
 };
 
 // Extract region from API base URL (e.g., "na1" from "https://api.na1.adobesign.com")
-const API_REGION = ADOBE_CONFIG.apiBaseUrl.match(/api\.([^.]+)\.adobesign/)?.[1] || 'na1';
+const API_REGION = (ADOBE_CONFIG.apiBaseUrl.match(/api\.([^.]+)\.adobesign/) || [])[1] || 'na1';
 const OAUTH_BASE_URL = `https://secure.${API_REGION}.adobesign.com`;
 
 // Validate configuration on startup
@@ -90,7 +90,7 @@ async function adobeSignAPI(endpoint, method = 'GET', data = null, accessToken) 
     const response = await axios(config);
     return response.data;
   } catch (error) {
-    console.error('Adobe Sign API Error:', error.response?.data || error.message);
+    console.error('Adobe Sign API Error:', (error.response && error.response.data) || error.message);
     throw error;
   }
 }
@@ -144,7 +144,7 @@ app.get('/callback', async (req, res) => {
     
     res.redirect('/agreements');
   } catch (error) {
-    console.error('Token exchange error:', error.response?.data || error.message);
+    console.error('Token exchange error:', (error.response && error.response.data) || error.message);
     res.status(500).send('Authentication failed');
   }
 });
@@ -173,7 +173,7 @@ app.get('/api/agreements', async (req, res) => {
   } catch (error) {
     res.status(500).json({ 
       error: 'Failed to fetch agreements',
-      details: error.response?.data || error.message 
+      details: (error.response && error.response.data) || error.message 
     });
   }
 });
@@ -197,7 +197,7 @@ app.get('/api/agreements/:agreementId/signingUrl', async (req, res) => {
   } catch (error) {
     res.status(500).json({ 
       error: 'Failed to get signing URL',
-      details: error.response?.data || error.message 
+      details: (error.response && error.response.data) || error.message 
     });
   }
 });

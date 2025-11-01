@@ -21,7 +21,7 @@ const ADOBE_CONFIG = {
 };
 
 // Extract region from API base URL
-const API_REGION = ADOBE_CONFIG.apiBaseUrl.match(/api\.([^.]+)\.adobesign/)?.[1] || 'na3';
+const API_REGION = (ADOBE_CONFIG.apiBaseUrl.match(/api\.([^.]+)\.adobesign/) || [])[1] || 'na3';
 
 // Validate configuration on startup
 function validateConfig() {
@@ -70,7 +70,7 @@ async function adobeSignAPI(endpoint, method = 'GET', data = null) {
     const response = await axios(config);
     return response.data;
   } catch (error) {
-    console.error('Adobe Sign API Error:', error.response?.data || error.message);
+    console.error('Adobe Sign API Error:', (error.response && error.response.data) || error.message);
     throw error;
   }
 }
@@ -99,7 +99,7 @@ app.get('/api/agreements', async (req, res) => {
   } catch (error) {
     res.status(500).json({ 
       error: 'Failed to fetch agreements',
-      details: error.response?.data || error.message 
+      details: (error.response && error.response.data) || error.message 
     });
   }
 });
@@ -116,7 +116,7 @@ app.get('/api/agreements/:agreementId/signingUrl', async (req, res) => {
   } catch (error) {
     res.status(500).json({ 
       error: 'Failed to get signing URL',
-      details: error.response?.data || error.message 
+      details: (error.response && error.response.data) || error.message 
     });
   }
 });
@@ -131,7 +131,7 @@ app.get('/api/health', async (req, res) => {
     res.status(500).json({ 
       status: 'error', 
       message: 'Access token is invalid or expired',
-      details: error.response?.data || error.message
+      details: (error.response && error.response.data) || error.message
     });
   }
 });
